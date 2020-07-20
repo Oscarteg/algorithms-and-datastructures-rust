@@ -17,6 +17,7 @@ impl<T> Node<T> {
     }
 }
 
+#[derive(Default)]
 pub struct LinkedList<T> {
     length: u32,
     start: Option<NonNull<Node<T>>>,
