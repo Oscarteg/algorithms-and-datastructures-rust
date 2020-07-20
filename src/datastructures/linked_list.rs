@@ -32,7 +32,7 @@ impl<T> LinkedList<T> {
         }
     }
 
-    pub fn add(&mut self, obj: T) -> () {
+    pub fn add(&mut self, obj: T) {
         let mut node = Box::new(Node::new(obj));
         unsafe {
             // Since we are adding node at the end, next will always be None
@@ -48,11 +48,11 @@ impl<T> LinkedList<T> {
 
             self.end = node_ptr;
         }
-        self.length = self.length + 1;
+        self.length += 1;
     }
 
-    pub fn get<'a>(&'a mut self, index: i32) -> Option<&'a T> {
-        return self.get_ith_node(self.start, index);
+    pub fn get(&mut self, index: i32) -> Option<&T> {
+        self.get_ith_node(self.start, index)
     }
 
     fn get_ith_node<'a>(&'a mut self, node: Option<NonNull<Node<T>>>, index: i32) -> Option<&'a T> {
@@ -69,8 +69,8 @@ impl<T> LinkedList<T> {
 }
 
 impl<T> Display for LinkedList<T>
-    where
-        T: Display,
+where
+    T: Display,
 {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         unsafe {
@@ -83,8 +83,8 @@ impl<T> Display for LinkedList<T>
 }
 
 impl<T> Display for Node<T>
-    where
-        T: Display,
+where
+    T: Display,
 {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         unsafe {
